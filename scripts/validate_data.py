@@ -88,7 +88,7 @@ def validate_data(data_directory):
             # A dumb way to check that this ran correctly again
             #if expectedhash == fhash: 
             #    yeses.append('Yes')
-    return print(yeses)
+    return 
     raise NotImplementedError(
         'This is just a template -- fill out the template with code.')
 
