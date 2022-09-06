@@ -14,6 +14,7 @@ import nipraxis as npx
 from findoutlie.metrics import dvars
 
 
+
 TEST_FNAME = npx.fetch_file('ds114_sub009_t2r1.nii')
 
 
@@ -33,3 +34,5 @@ def test_dvars():
         long_dvals.append(np.sqrt(np.sum(d ** 2) / n_voxels))
         prev_vol = this_vol
     assert np.allclose(dvals, long_dvals)
+
+
