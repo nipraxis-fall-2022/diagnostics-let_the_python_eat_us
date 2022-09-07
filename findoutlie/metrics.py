@@ -26,13 +26,13 @@ def dvars(img):
     lst = []
     for i in range(img.shape[-1]):
         if (data[..., i] == data[..., -1]).all():
-            print(i, "last skipped!")
+            #print(i, "last skipped!")   #just to check it's working
             continue
         this_vol = data[..., i]
         next_vol = data[..., i+1]
         vol_diff = next_vol - this_vol
         lst.append(np.sqrt(np.sum(vol_diff ** 2) / n_voxels))
-        print(i, "appended!")
+        #print(i, "appended!") #just to check it's working
     return np.array(lst)
 
     # Hint: remember 'axis='.  For example:
