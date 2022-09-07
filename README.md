@@ -16,7 +16,7 @@ We are happy, we are rested, we want to be here :)
 
 ```
 cd data
-curl -L https://figshare.com/ndownloader/files/34951740 -o group_data.tar
+curl -L https://figshare.com/ndownloader/files/34951740 -o group_data.tar #call 'curl.exe' or it freaks out for me (see: https://stackoverflow.com/questions/30807318/running-curl-via-powershell-how-to-construct-arguments)
 tar xvf group_data.tar
 ```
 
