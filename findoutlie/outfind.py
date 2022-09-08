@@ -7,19 +7,18 @@ import nibabel as nib
 
 import numpy as np
 
+from findoutlie import spm_funcs as spm # call our spm_funcs .py file (given to us - unchanged)
+
+from findoutlie import detectors as det # calls our detectors .py file (which we wrote)
+
 
 def detect_outliers(fname):
-    img = nib.load(fname)
-    data = img.get_fdata()
-    OneD_scans = data.reshape((-1, data.shape[-1])) #Alex: recall reshape((newshape),order)
-                                                                # So this returns a 2D array  with
-                                                                    # rows of length -1 (i.e. np solves it)
-                                                                    # and columsn corriposnding to time stamps (scans) 
-                                                                # Basically we gets each scan flattended to 1D
-    means = np.mean(OneD_scans, axis=0)
-    std_of_means = np.std(means)
-    threshold = 2* std_of_means
-    outliers = np.where(np.abs(means - np.mean(means)) > threshold)
+    data_inside = spm.get_spm_globals(fname) #Alex: Before we look for outliers lets figure out whats in the head
+                                                        # This applies the SPM method to the file 
+                                                        # and returns a mean per volume.
+    outliers_tf = det.iqr_detector(data_inside,1.5) # Alex: this takes those means and applies the Tukey method (IQR)
+                                                        # The function then returns True if the volume is an outlier
+    outliers = np.where(outliers_tf==True) # Alex: This then returns a set of indecies corrisponding to the outliers
     return outliers
 
 
