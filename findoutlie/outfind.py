@@ -3,9 +3,24 @@
 
 from pathlib import Path
 
+import nibabel as nib
+
+import numpy as np
+
 
 def detect_outliers(fname):
-    return [42]
+    img = nib.load(fname)
+    data = img.get_fdata()
+    voxel_time_courses = data.reshape((-1, data.shape[-1])) #Alex: recall reshape((newshape),order)
+                                                                # So this returns a 2D array  with
+                                                                    # rows of length -1 (i.e. np solves it)
+                                                                    # and columsn corriposnding to time stamps (scans) 
+                                                                # Basically we gets each scan flattended to 1D
+    means = np.mean(voxel_time_courses, axis=0)
+    std_of_means = np.std(means)
+    threshold = 2* std_of_means
+    outliers = np.where(np.abs(means - np.mean(means)) > threshold)
+    return outliers
 
 
 def find_outliers(data_directory):
