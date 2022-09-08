@@ -12,6 +12,8 @@ requirements are met and raise an error otherwise.
 
 # Any imports you need
 # +++your code here+++
+from ast import Return
+import numpy as np
 
 from ast import Return
 import numpy as np
@@ -47,17 +49,16 @@ def iqr_detector(measures, iqr_proportion=1.5):
         A boolean vector of same length as `measures`, where True means the
         corresponding value in `measures` is an outlier.
     """
-
-    #Code fixed based on edit by aac61 :)
-
-    Q1 = np.percentile(measures,25)
-    Q3 = np.percentile(measures,75)
-    IQR = Q3 - Q1
-    outlier_tf = np.logical_or(measures < (Q1-(iqr_proportion * IQR)),measures > (Q3+(iqr_proportion * IQR)))
-
-
+    
     # Hints:
     # * investigate np.percentile
     # * You'll likely need np.logical_or
     # https://textbook.nipraxis.org/numpy_logical.html
     # +++your code here+++
+
+    #Calculating the quartiels and the IQR for some vector called 'measures'
+    Q1 = np.percentile(measures,25)
+    Q3 = np.percentile(measures,75)
+    IQR = Q3 - Q1
+    outlier_tf = np.logical_or(measures < (Q1-(iqr_proportion * IQR)),measures > (Q3+(iqr_proportion * IQR)))
+    return outlier_tf
