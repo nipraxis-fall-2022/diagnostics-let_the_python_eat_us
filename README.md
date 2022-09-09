@@ -12,6 +12,14 @@ This README file has instructions on how to get, validate and process the data.
 We are here, we are queer ... wait no
 We are happy, we are rested, we want to be here :)
 
+## Alex's Guide to updating my local copy becasue I keep forgetting 
+git fetch upstream # get changes from upstream (the group project)
+git brach -va # check what branch you are on
+git checkout main # go to main
+git mrege upstream/main #merge the upstream to main
+git branch -va # check local main matchs upstream (if it doesn't run git fetch again)
+
+
 ## Get the data
 
 ```
