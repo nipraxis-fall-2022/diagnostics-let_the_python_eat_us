@@ -26,7 +26,7 @@ def dvars(img):
                                             # calculate the mean voxel value later 
     lst = []
     for i in range(img.shape[-1]): #Alex: this gets a series of volumes along time (the last demenstion)
-        if (data[..., i] == data[..., -1]):.all(): # Alex: if the volume is the last in the series, 
+        if (data[..., i] == data[..., -1]).all(): # Alex: if the volume is the last in the series, 
                                                         # Why do we need .all()?
             #print(i, "last skipped!")   #just to check it's working
             continue # Alex: continue casues the loop to skip the rest of the loop and start the next iteration
