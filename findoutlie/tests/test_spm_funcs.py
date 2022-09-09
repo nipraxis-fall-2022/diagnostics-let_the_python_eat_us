@@ -27,23 +27,23 @@ import nibabel as nib
 
 # This import needs the directory containing the findoutlie directory
 # on the Python path.
-from spm_funcs import get_spm_globals, spm_global
+from findoutlie.spm_funcs import get_spm_globals, spm_global # Had to add <findoutlie.> to get it work
 
 
 def test_spm_globals():
     # Test get_spm_globals and spm_global functions
-    example_path = MY_DIR / EXAMPLE_FILENAME
-    expected_values = np.loadtxt(MY_DIR / 'global_signals.txt')
-    glob_vals = get_spm_globals(example_path)
+    example_path = MY_DIR / EXAMPLE_FILENAME # these are defined for a specific test file
+    expected_values = np.loadtxt(MY_DIR / 'global_signals.txt') # known values they gave us
+    glob_vals = get_spm_globals(example_path) # run our function (for an entier file)
     assert glob_vals is not None, 'Did you forget to return the values?'
-    assert np.allclose(glob_vals, expected_values, rtol=1e-4)
+    assert np.allclose(glob_vals, expected_values, rtol=1e-4) #check out put matches expected
     img = nib.load(example_path)
     data = img.get_fdata()
     globals = []
-    for vol_no in range(data.shape[-1]):
-        vol = data[..., vol_no]
-        globals.append(spm_global(vol))
-    assert np.allclose(globals, expected_values, rtol=1e-4)
+    for vol_no in range(data.shape[-1]): # for each volume in the time series
+        vol = data[..., vol_no] # get the volume
+        globals.append(spm_global(vol)) # get the spm for a specific volume
+    assert np.allclose(globals, expected_values, rtol=1e-4) # check output matchs the expected values
 
 
 if __name__ == '__main__':

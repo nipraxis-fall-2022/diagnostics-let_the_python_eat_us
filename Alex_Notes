@@ -1,0 +1,11 @@
+# Alex's notes for things he is apt to forget
+
+## Update local copy with changes to group project
+git fetch upstream # get changes from upstream (the group project)
+git brach -va # check what branch you are on
+git checkout main # go to main
+git mrege upstream/main #merge the upstream to main
+git branch -va # check local main matchs upstream (if it doesn't run git fetch again)
+
+## Testing 
+To run a test file use: python3 -m pytest < path realtive to wd (e.g. findoutlie/tests/test_dvars.py) >
