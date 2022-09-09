@@ -3,23 +3,33 @@
 
 from pathlib import Path
 
-import nibabel as nib
-
 import numpy as np
 
-from findoutlie import spm_funcs as spm # call our spm_funcs .py file (given to us - unchanged)
+import nibabel as nib
 
-from findoutlie import detectors as det # calls our detectors .py file (which we wrote)
+from .metrics import dvars
+from .detectors import iqr_detector
 
 
 def detect_outliers(fname):
-    data_inside = spm.get_spm_globals(fname) #Alex: Before we look for outliers lets figure out whats in the head
-                                                        # This applies the SPM method to the file 
-                                                        # and returns a mean per volume.
-    outliers_tf = det.iqr_detector(data_inside,1.5) # Alex: this takes those means and applies the Tukey method (IQR)
-                                                        # The function then returns True if the volume is an outlier
-    outliers = np.where(outliers_tf==True) # Alex: This then returns a set of indecies corrisponding to the outliers
-    return outliers
+    """ Detect outliers given image file path `filename`
+
+    Parameters
+    ----------
+    fname : str or Path
+        Filename of 4D image, as string or Path object
+
+    Returns
+    -------
+    outliers : array
+        Indices of outlier volumes.
+    """
+    # This is a very simple function, using dvars and iqroutliers
+    img = nib.load(fname)
+    dvs = dvars(img)
+    is_outlier = iqr_detector(dvs, iqr_proportion=2)
+    # Return indices of True values from Boolean array.
+    return np.nonzero(is_outlier)
 
 
 def find_outliers(data_directory):
