@@ -22,12 +22,14 @@ def dvars(img):
         volumes in `img`.
     """
     data = img.get_fdata()
-    n_voxels = np.prod(img.shape[:-1])
+    n_voxels = np.prod(img.shape[:-1]) # Alex: this calcuates how many voxels are in a volume so we can 
+                                            # calculate the mean voxel value later 
     lst = []
-    for i in range(img.shape[-1]):
-        if (data[..., i] == data[..., -1]).all():
+    for i in range(img.shape[-1]): #Alex: this gets a series of volumes along time (the last demenstion)
+        if (data[..., i] == data[..., -1]).all(): # Alex: if the volume is the last in the series, 
+                                                        # Why do we need .all()?
             #print(i, "last skipped!")   #just to check it's working
-            continue
+            continue # Alex: continue casues the loop to skip the rest of the loop and start the next iteration
         this_vol = data[..., i]
         next_vol = data[..., i+1]
         vol_diff = next_vol - this_vol

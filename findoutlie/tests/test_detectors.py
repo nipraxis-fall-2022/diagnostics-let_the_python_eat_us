@@ -24,7 +24,7 @@ import numpy as np
 
 # This import needs the directory containing the findoutlie directory
 # on the Python path.
-from detectors import iqr_detector
+from findoutlie.detectors import iqr_detector # Alex: had to add <findoutlie.> infront of the module
 
 
 def test_iqr_detector():
@@ -33,7 +33,9 @@ def test_iqr_detector():
         [10.2, 14.1, 14.4, 14.4, 14.4, 14.5, 14.5, 14.6, 14.7, 14.7, 14.7,
          14.9, 15.1, 15.9, 16.4])
     is_outlier = iqr_detector(example_values, 1.5)
-    assert np.all(example_values[is_outlier] == [10.2, 15.9, 16.4])
+    assert np.all(example_values[is_outlier] == [10.2, 15.9, 16.4]) # given the some random numbers and
+                                                                    # the default IQR multiplier, does it
+                                                                    # find the right ouliers
     # Test not-default value for outlier proportion
     is_outlier = iqr_detector(example_values, 0.5)
     assert np.all(example_values[is_outlier] == [10.2, 14.1, 15.1, 15.9, 16.4])

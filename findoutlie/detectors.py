@@ -15,9 +15,6 @@ requirements are met and raise an error otherwise.
 from ast import Return
 import numpy as np
 
-from ast import Return
-import numpy as np
-
 def iqr_detector(measures, iqr_proportion=1.5):
     """ Detect outliers in `measures` using interquartile range.
 
