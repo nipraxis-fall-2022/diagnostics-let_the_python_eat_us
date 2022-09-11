@@ -4,11 +4,15 @@
 git fetch upstream # get changes from upstream (the group project)
 git brach -va # check what branch you are on
 git checkout main # go to main
-git mrege upstream/main #merge the upstream to main
+git merge upstream/main #merge the upstream to main
 git branch -va # check local main matchs upstream (if it doesn't run git fetch again)
 
 ## Push changes to (personal) fork
-git push origin < branch name > --set-upstream.
+git push origin < branch name > --set-upstream
 
 ## Testing 
 To run a test file use: python3 -m pytest < path realtive to wd (e.g. findoutlie/tests/test_dvars.py) >
+
+## Merge branch into main
+git checkout main
+git merge new-branch
