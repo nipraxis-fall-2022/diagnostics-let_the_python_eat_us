@@ -51,17 +51,21 @@ def dvars(img):
 def dvars_all(img):
     """ Calculate dvars metric on Nibabel image `img`
 
-    The dvars calculation between two volumes is defined as the square root of
-    (the mean of the (voxel differences squared)).
+    We have tried to generalise dvar function above. Rather than comparing the differences between the 
+    voxels of two volumes, this uses the basic dvar idea to compair the voxels of a volume against all 
+    the others in a time series. For each volume this produces n_trials-1 (one for each comparison) 
+    dvar metrics. To obtain a global dvar metric for each volume, we then re-apply the basic dvar idea 
+    to compare the the n_trials-1 differences associate with a volume and return a single index of 
+    differnce. 
 
     Parameters
     ----------
-    img : nibabel image
+    img : nibabel image (4d)
 
     Returns
     -------
     dvals : 1D array
-        One-dimensional array with n-1 elements, where n is the number of
+        One-dimensional array with n elements, where n is the number of
         volumes in `img`.
     """
     #print(Path())

@@ -12,9 +12,11 @@ instructions here after reading, to make space for your own thoughts.
 'You should add a text file giving: - a brief summary for each outlier scan, - why you think the detected scans should be rejected as an outlier, and - your educated guess as to the cause of the difference between this scan and the rest of the scans in the run'
 
 ## Points to discuss with the group/Initial thoughts
-- How do we want to define outliers? - the Tukey method (IQR) is better than using standard devations as the latter is susceptible to skewing due to outliers - do we want to stick with 1.5 IQR above/below Q1/3? It's fairly standard I think ... 
-
-- do we want to try and remove the background noise (SPM) before we identify outliers? We do have a function ready to go ... but not sure how much it would affect the end result - this really depends on what kind of outliers we are looking for: general scans, or brain activity ... - we could also potentially improve upon the spm function. It uses an arbitrary threshold. But if it's too low, we risk leaving bits of the background (floties). If it's too high, we risk loosing bits of the brain (cavities). We could try to write a function that checks how many floaties/cavities the current spm function returns to see if it's even worth fiddling with. 
+- How do we want to define outliers? 
+    - the Tukey method (IQR) is better than using standard devations as the latter is susceptible to skewing due to outliers 
+    - do we want to stick with 1.5 IQR above/below Q1/3? It's fairly standard I think ... 
+- do we want to try and remove the background noise (SPM) before we identify outliers? We do have a function ready to go ... but not sure how much it would affect the end result 
+    - this really depends on what kind of outliers we are looking for: general scans, or brain activity ... - we could also potentially improve upon the spm function. It uses an arbitrary threshold. But if it's too low, we risk leaving bits of the background (floties). If it's too high, we risk loosing bits of the brain (cavities). We could try to write a function that checks how many floaties/cavities the current spm function returns to see if it's even worth fiddling with. 
 - does anyone know a good (linguistics) paper that dicsusses how they cleaned their data? 
 
 ## Planning - Meetings
