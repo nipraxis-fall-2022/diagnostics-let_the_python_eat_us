@@ -31,6 +31,8 @@ An alternative is to use the simpler SPM function, which is much more easily int
 In both cases, a further step is required to statistically decide which elements differ "enough" to be considered outliers. 
 For this we use the IQR Tukey method. 
 
+Currently the code implements the generalised dvars function to identify differences between scans, and identifies outliers using IQR.
+
 ## Literature
 We have looked into a number of papers discussing outlier detection in neuroimaging scans. However, we are at this point lacking the theoretical & mathematical knowledge to implement the formulas and were unable to find relevant code/examples. Any help would be greatly appreciated. 
 @nipraxis-fall-2022/instructors

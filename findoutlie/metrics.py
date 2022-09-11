@@ -58,6 +58,9 @@ def dvars_all(img):
     to compare the the n_trials-1 differences associate with a volume and return a single index of 
     differnce. 
 
+    Warning: computationally this function is very cumbersom. Unless you really want to see it run, you 
+    can find the output saved to potential_outliers.txt
+
     Parameters
     ----------
     img : nibabel image (4d)
