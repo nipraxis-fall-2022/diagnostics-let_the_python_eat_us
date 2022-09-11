@@ -12,3 +12,7 @@ git push origin < branch name > --set-upstream
 
 ## Testing 
 To run a test file use: python3 -m pytest < path realtive to wd (e.g. findoutlie/tests/test_dvars.py) >
+
+## Merge branch into main
+git checkout main
+git merge new-branch
