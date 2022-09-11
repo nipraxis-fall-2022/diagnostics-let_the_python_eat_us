@@ -26,7 +26,7 @@ def print_outliers(data_directory):
         for out_ind in outliers:
             outlier_strs.append(str(out_ind))
         print(', '.join([str(fname)] + outlier_strs))
-
+        
 
 def get_parser():
     parser = ArgumentParser(description=__doc__,  # Usage from docstring
