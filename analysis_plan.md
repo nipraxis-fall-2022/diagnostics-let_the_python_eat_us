@@ -1,13 +1,5 @@
 # Analysis plan
 
-This is file for your sketch for an *analysis plan*.
-
-See the instructions in `on_the_project.md`.
-
-Feel free to edit anything here. You may well want to digitally burn the
-instructions here after reading, to make space for your own thoughts.
-
-
 ## The task
 'You should add a text file giving: - a brief summary for each outlier scan, - why you think the detected scans should be rejected as an outlier, and - your educated guess as to the cause of the difference between this scan and the rest of the scans in the run'
 
@@ -28,10 +20,18 @@ This metric does not have a clear/intuitive interpretation; it flags out a volum
 
 An alternative is to use the simpler SPM function, which is much more easily interpretable and produces a set of scans that have already some of the empty space around the head removed (important because this space could introduce noise). 
 
-In both cases, a further step is required to statistically decide which elements differ "enough" to be considered outliers. 
+Andromachi has added some a function called mahal() that uses Mahalanobis distances to account for correlation. The results are _very_ similar to the generalised dvars function and runs way faster! 
+
+In any cases, a further step is required to statistically decide which elements differ "enough" to be considered outliers. 
 For this we use the IQR Tukey method. 
 
-Currently the code implements the generalised dvars function to identify differences between scans, and identifies outliers using IQR.
+## Current state of the analysis
+The currently implemented code allows you to choose either the generalised dvars function or the mahal function to identify differences between scans. It then takes those values and identifies outliering scans using IQR (Tukey mehtod).
+
+To choose between them, pass one of the following argument to the parser when you run the outlier script: 
+python3 scripts/find_outliers.py data <dvars_all / mahal>
+
+We need to update the text discritptions in our files and start putting this info in the read me!
 
 ## Literature
 We have looked into a number of papers discussing outlier detection in neuroimaging scans. However, we are at this point lacking the theoretical & mathematical knowledge to implement the formulas and were unable to find relevant code/examples. Any help would be greatly appreciated. 
