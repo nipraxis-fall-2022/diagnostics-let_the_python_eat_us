@@ -8,8 +8,8 @@ Note(b): changed some stuff in find_outliers.py and outfind.py so we can call wh
 
 Note(c): you can run fin_outliers as script or import in python session. If in python session, make sure you've loaded the methods.
 
-    from findoutlie import outfind
     from findoutlie.metrics import dvars, dvars_all
+    from findoutlie.mahal import mahal
 
 ### 2. Added 3 new files 
     
