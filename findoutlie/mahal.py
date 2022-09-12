@@ -39,16 +39,22 @@ import numpy as np
 
 def mahal(img):
     img_data = img.get_fdata()
-    data_reshaped = np.reshape(img_data, (-1, img_data.shape[-1]))
+    data_reshaped = np.reshape(img_data, (-1, img_data.shape[-1])) #Flatten volumes into rows arrange by time (columns)
+    
     # Excluding data based on spm global
-    mean_vol = np.mean(data_reshaped, axis=-1)
-    mean_mean = np.mean(mean_vol)
+    mean_vox = np.mean(data_reshaped, axis=-1) #Alex: This isnt averaging over volumes, its averaging over voxels (volumes: axis = 0; Voxels: axis =-1/1)
+                                               # Try adding the following code to see what I mean
+                                               # mean_vol_extra = np.array(mean_vol)
+                                               # print(mean_vol_extra.shape)
+    mean_mean = np.mean(mean_vox) #we could also call np.mean(data_reshaped)
     thresh = mean_mean / 8  # the "spm global" function
-    mask = mean_vol > thresh
+    mask = mean_vox > thresh
     data = data_reshaped[mask, :]  # keeping only voxels above threshold
+    # Ahh this code is identifing a consisten set of voxels to remove for all volume in a time series. I will rename the variable 
+    
     mahal_dist_lst = []
-    for vol_no in range(data.shape[-1]):
-        this_vol = data[:, vol_no]
+    for vol_no in range(data.shape[-1]): #for each volume in the time series
+        this_vol = data[:, vol_no] # this returns a set of voxel values
         # covariance of volume
         cov = np.cov(this_vol.T)
         # np.cov is based on the np.dot product (i.e. sum of vector multiplication)
@@ -57,7 +63,9 @@ def mahal(img):
         # see https://stackoverflow.com/questions/21759026/python-covariance-matrix-by-hand
         # https://stackoverflow.com/questions/50879686/different-results-for-covariance-matrix-when-using-numpy-cov
         # next, we take away the mean of volume data from current volume
-        this_vol_minus_mean = this_vol - np.mean(data, axis=1)
+        this_vol_minus_mean = this_vol - np.mean(data, axis=1) #Alex: Again I think this is over voxels rather than volumes...
+                                                               # Ah yes, its calculting the average value for each voxel across volumes, and then 
+                                                               # subtracting that from the voxel value in the current volume. 
         # now we calculate the inverse of covariance
         # so we try this: https://stackoverflow.com/questions/58085632/how-to-calculate-mahalanobis-distance-between-randomly-generated-values
         # but np.linalg.inv() doesn't work because cov looks like an empty array, test with: print(cov.shape, type(cov))
