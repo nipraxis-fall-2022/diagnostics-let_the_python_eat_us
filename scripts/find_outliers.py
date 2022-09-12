@@ -49,7 +49,7 @@ def print_outliers(data_directory, method):
 
 def get_parser():
     method_keys = {'dvars': dvars,
-                    'dvars_all': dvars,
+                    'dvars_all': dvars_all,
                     'mahal': mahal}
     parser = ArgumentParser(description=__doc__,  # Usage from docstring
                             formatter_class=RawDescriptionHelpFormatter)
