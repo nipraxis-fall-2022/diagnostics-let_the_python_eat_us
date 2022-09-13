@@ -27,9 +27,9 @@ def detect_outliers(fname, method):
     if method == dvars:
         is_outlier = iqr_detector(dvars(img), iqr_proportion=2)
     elif method == dvars_all: #note this is the gernalised dvars
-        is_outlier = iqr_detector_for_dvars_all(dvars_all(img, iqr_proportion=2)) # this will pickout anything 2 IQR over the 3rd Quantile
+        is_outlier = iqr_detector_uper_only(dvars_all(img, iqr_proportion=2)) # this will pickout anything 2 IQR over the 3rd Quantile
     else:                                                                         # note we are not doing under the 1st becasue dvars/dvars_all()
-        is_outlier = iqr_detector(mahal(img), iqr_proportion=2)                   # give an index of how much the volume deviates from something else
+        is_outlier = iqr_detector_uper_only(mahal(img), iqr_proportion=2)                   # give an index of how much the volume deviates from something else
     # Return indices of True values from Boolean array.
     return np.nonzero(is_outlier)
 
