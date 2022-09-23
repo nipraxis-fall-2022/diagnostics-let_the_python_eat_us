@@ -61,7 +61,7 @@ def iqr_detector(measures, iqr_proportion=1.5):
     return outlier_tf
     #we only want over if we use dvars
 
-def iqr_detector_for_dvars_all(measures, iqr_proportion=1.5):
+def iqr_detector_uper_only(measures, iqr_proportion=1.5):
     """ Detect outliers in `measures` using interquartile range.
 
     Returns a boolean vector of same length as `measures`, where True means the
@@ -104,6 +104,7 @@ def iqr_detector_for_dvars_all(measures, iqr_proportion=1.5):
     Q3 = np.percentile(measures,75)
     IQR = Q3 - Q1
     outlier_tf = (measures > (Q3+(iqr_proportion * IQR))) # Note Alex changed this to work with dvars_all() 
+                                                          # We also need this for mahal()
                                                           # becasue that code returns an index of difference 
                                                           # removing the lower tail doesnt make sense anymore
     return outlier_tf
